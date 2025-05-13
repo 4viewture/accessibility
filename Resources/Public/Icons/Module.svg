@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220">
+    <!-- Hintergrund mit Safe Space -->
+    <rect width="220" height="220" fill="#85b6c8"/>
+
+    <!-- Äußerer Kreis (Icon selbst) zentriert innerhalb 200x200 -->
+    <circle cx="110" cy="110" r="90" fill="none" stroke="white" stroke-width="12"/>
+
+    <!-- Kopf -->
+    <circle cx="110" cy="70" r="14" fill="white"/>
+
+    <!-- Körper -->
+    <line x1="110" y1="84" x2="110" y2="130" stroke="white" stroke-width="12"/>
+
+    <!-- Arme -->
+    <line x1="70" y1="100" x2="150" y2="100" stroke="white" stroke-width="12"/>
+
+    <!-- Beine -->
+    <line x1="110" y1="130" x2="85" y2="170" stroke="white" stroke-width="12"/>
+    <line x1="110" y1="130" x2="135" y2="170" stroke="white" stroke-width="12"/>
+</svg>

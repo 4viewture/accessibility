@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  FourViewture\Accessibility\:
+    resource: '../Classes/*'
+    exclude: '../Classes/Domain/Model/*'
+  FourViewture\Accessibility\Backend\Controller\StandardController:
+    tags:
+      - backend.controller
+  FourViewture\Accessibility\Backend\Controller\ImageAlternativeTextController:
+    tags:
+      - backend.controller

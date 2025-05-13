@@ -1,0 +1,104 @@
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" />
+>
+
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <f:if condition="{menuEntries}">
+        <f:then>
+            <div class="card-container">
+                <f:for each="{menuEntries}" as="menuEntry">
+                    <f:render section="toolCard" arguments="{menuEntry:menuEntry}" />
+                </f:for>
+            </div>
+        </f:then>
+    </f:if>
+</f:section>
+</html>
+
+<f:section name="toolCard">
+    <f:variable name="imageUri">...</f:variable>
+    <f:if condition="{menuEntry.image}">
+        <f:variable name="imageUri">{menuEntry.image}</f:variable>
+    </f:if>
+
+    <f:variable name="linkUri">about:blank</f:variable>
+    <f:variable name="hasLinkUri">0</f:variable>
+    <f:if condition="{menuEntry.uri}">
+        <f:variable name="linkUri">{menuEntry.uri}</f:variable>
+        <f:variable name="hasLinkUri">1</f:variable>
+    </f:if>
+    <f:if condition="{menuEntry.route}">
+        <f:variable name="linkUri"><f:be.uri route="{menuEntry.route}"></f:be.uri></f:variable>
+        <f:variable name="hasLinkUri">1</f:variable>
+    </f:if>
+
+    <f:variable name="linkTarget"></f:variable>
+    <f:if condition="{menuEntry.target}">
+        <f:variable name="linkTarget">{menuEntry.target}</f:variable>
+    </f:if>
+
+    <f:variable name="badgeClass">badge-success</f:variable>
+    <f:if condition="{menuEntry.badgeClass}">
+        <f:variable name="badgeClass">{menuEntry.badgeClass}</f:variable>
+    </f:if>
+
+    <div class="card-container">
+        <div class="card card-size-fixed-small" style="margin-right:2rem;">
+            <div class="card-image">
+                <a href="{linkUri}" class="distribution-image" target="{linkTarget}">
+                    <f:if condition="{imageUri}">
+                        <img src="{f:uri.resource(path: imageUri)}" width="600" height="450" alt="" />
+                    </f:if>
+                </a>
+                <f:if condition="{menuEntry.badge}">
+                    <div class="card-image-badge">
+                        <span class="badge {badgeClass}">{menuEntry.badge}</span>
+                    </div>
+                </f:if>
+                <f:if condition="{menuEntry.visualBadge}">
+                    <div class="distribution-official-badge">
+                        <core:icon identifier="{menuEntry.visualBadge}" size="mega"/>
+                    </div>
+                </f:if>
+            </div>
+            <div class="card-header"><h2>{menuEntry.label}</h2></div>
+            <div class="card-body">{menuEntry.description}</div>
+            <div class="card-footer">
+                <f:if condition="{menuEntry.actions}">
+                    <f:then>
+                        <f:for each="{menuEntry.actions}" as="action">
+                            <f:variable name="action_uri">{action.uri}</f:variable>
+                            <f:if condition="{action.route}">
+                                <f:variable name="action_uri"><f:be.uri route="{action.route}"></f:be.uri></f:variable>
+                            </f:if>
+                            <a href="{action_uri}"
+                               class="btn {f:if(condition: action.cssClass, then: action.cssClass, else: 'btn-default')}"
+                               target="{action.target}">
+                                <f:if condition="{action.icon}">
+                                    <core:icon identifier="{action.icon}" />
+                                </f:if>
+                                {action.label}
+                            </a>
+                        </f:for>
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{hasLinkUri}">
+                            <a href="{linkUri}"
+                               class="btn btn-default"
+                               target="{linkTarget}">
+                                Öffnen
+                            </a>
+                        </f:if>
+                    </f:else>
+                </f:if>
+            </div>
+        </div>
+    </div>
+</f:section>
+
+
+
+

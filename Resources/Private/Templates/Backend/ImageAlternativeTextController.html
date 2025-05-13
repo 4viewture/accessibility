@@ -1,0 +1,71 @@
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+>
+
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <f:variable name="fieldsToShow">fileinfo,title,description,alternative,caption,status,note</f:variable>
+    <h1>
+        Bilder ohne Alternativtext
+    </h1>
+    <div class="panel panel-default">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>uid</th>
+                <th>Dateiname und Pfad</th>
+                <th>Titel</th>
+                <th>Verwendet</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+                <f:for each="{records}" as="record">
+                    <tr>
+                        <td class="text-right nowrap" style="text-align: right">
+                            <be:link.editRecord table="sys_file_metadata" uid="{record.metadata_uid}">
+                                {record.file_uid}
+                            </be:link.editRecord>
+                        </td>
+                        <td>
+                            <be:link.editRecord table="sys_file_metadata" uid="{record.metadata_uid}" fields="{fieldsToShow}">
+                                {record.identifier}
+                            </be:link.editRecord>
+                        </td>
+                        <td>{record.title}</td>
+                        <td class="text-right nowrap" style="text-align: right">{record.reference_count}</td>
+                        <td>
+                            <div class="btn-group">
+                                <be:link.editRecord table="sys_file_metadata" uid="{record.metadata_uid}" fields="{fieldsToShow}" class="btn btn-default">
+                                    <core:icon identifier="actions-open" />
+                                </be:link.editRecord>
+                                <a
+                                    class="btn btn-default"
+                                    href="#"
+                                    data-dispatch-action="TYPO3.InfoWindow.showItem"
+                                    data-dispatch-args-list="sys_file,{record.file_uid}"
+                                >
+                                    <core:icon identifier="actions-document-info" />
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </f:for>
+            </tbody>
+        </table>
+    </div>
+    <f:if condition="{pagination.totalPages} > 1">
+        <ul class="pagination">
+            <f:for each="1..{pagination.lastPage}" as="page">
+                <li class="{f:if(condition: page == currentPage, then: 'active')}">
+                    <a href="{baseUri}&page={page}">{page}</a>
+                </li>
+            </f:for>
+        </ul>
+    </f:if>
+
+</f:section>
+</html>
