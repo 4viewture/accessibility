@@ -1,0 +1,48 @@
+# Define how to render the barrier_free_content content element
+tt_content.accessibility_barrier_free_content =< lib.contentElement
+tt_content.accessibility_barrier_free_content {
+    templateName = Barrierfree/Index
+    templateRootPaths {
+        10 = EXT:accessibility/Resources/Private/Templates/
+    }
+    partialRootPaths {
+        10 = EXT:accessibility/Resources/Private/Partials/
+    }
+    layoutRootPaths {
+        10 = EXT:accessibility/Resources/Private/Layouts/
+    }
+
+    # Map the content element data to the Fluid template variables
+    dataProcessing {
+        10 = TYPO3\CMS\Frontend\DataProcessing\SiteProcessor
+        10 {
+          as = site
+        }
+        20 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        20 {
+            references.fieldName = image
+        }
+    }
+}
+
+# Plugin configuration
+plugin.tx_accessibility_barrier_free_content {
+    view {
+        templateRootPaths {
+            0 = EXT:accessibility/Resources/Private/Templates/
+            10 = {$plugin.tx_accessibility_content.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:accessibility/Resources/Private/Partials/
+            10 = {$plugin.tx_accessibility_content.view.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:accessibility/Resources/Private/Layouts/
+            10 = {$plugin.tx_accessibility_content.view.layoutRootPath}
+        }
+    }
+
+    settings {
+        # Define any plugin-specific settings here
+    }
+}

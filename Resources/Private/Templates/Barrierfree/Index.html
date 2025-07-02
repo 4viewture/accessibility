@@ -1,0 +1,105 @@
+
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:bf="http://typo3.org/ns/Fucodo/BarrierFree/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="Main">
+    <f:render partial="Content/Header" section="Header" arguments="{_all}"/>
+    <f:variable name="mainHeaderType">{settings.defaultHeaderType}</f:variable>
+    <f:variable name="subHeaderType"><bf:math.sum a="{settings.defaultHeaderType}" b="1" /></f:variable>
+
+    <f:render section="section" arguments="{headerType:mainHeaderType, header:'Barrierefreiheitserklärung '}" contentAs="content">
+        <p>
+            Name und Anschrift des Unternehmens: {data.tx_barrierfree_name}, {data.tx_barrierfree_address}
+            <br>
+            Domain: <a href="{site.base}">{site.base.host}</a>
+            <br>
+            Telefon: {data.tx_barrierfree_phone}
+            <br>
+            E-Mail: {data.tx_barrierfree_email}
+        </p>
+    </f:render>
+
+    <f:render section="section" arguments="{headerType:subHeaderType, header:'Einleitung'}" contentAs="content">
+        <p>
+            Der {data.tx_barrierfree_name} ist bestrebt, seine Website {site.base.host} in Übereinstimmung mit dem
+            Barrierefreiheitsstärkungsgesetz (BFSG) barrierefrei zugänglich zu machen.
+            Diese Erklärung zur Barrierefreiheit gilt für die Website {site.base.host}.
+        </p>
+    </f:render>
+
+    <f:render section="section" arguments="{headerType:subHeaderType, header:'Stand der Vereinbarkeit mit den Anforderungen'}" contentAs="content">
+        <p>
+            Die Website {site.base.host} ist aufgrund der folgenden Unvereinbarkeiten und Ausnahmen teilweise
+            mit dem Barrierefreiheitsstärkungsgesetz (BFSG) vereinbar.
+        </p>
+    </f:render>
+    <f:render section="section" arguments="{headerType:subHeaderType, header:'Nicht barrierefreie Inhalte'}" contentAs="content">
+        <p>
+            Die nachstehend aufgeführten Inhalte sind aus den folgenden Gründen nicht barrierefrei:
+        </p>
+        {data.tx_barrierfree_notBarrierFreeContent -> f:format.html()}
+    </f:render>
+    <f:render section="section" arguments="{headerType:subHeaderType, header:'Barrieren aufgrund wirtschaftlicher Unzumutbarkeit'}" contentAs="content">
+        <p>
+            Einige Barrieren auf unserer Website können aus Gründen der wirtschaftlichen Zumutbarkeit nicht kurzfristig behoben werden. Dazu gehören:
+        </p>
+        {data.tx_barrierfree_notBarrierFreeContentDueToEconomicUnreasonableness -> f:format.html()}
+    </f:render>
+    <f:render section="section" arguments="{headerType:subHeaderType, header:'Barrieren Melden, Feedback und Kontaktangaben'}" contentAs="content">
+        <p>
+            Sind Ihnen Barrieren beim Zugang zu Inhalten auf www.DRK-Musterstadt.de aufgefallen?
+            Dann können Sie sich gerne bei uns melden.
+            Wir freuen uns auf Ihr Feedback und bemühen uns, die gemeldeten Barrieren in Rahmen der technischen und
+            wirtschaftlichen Möglichkeiten schnellstmöglich zu beheben.
+            Bitte teilen Sie uns mit, auf welche Seite und bei welcher Funktion Sie auf Barrieren gestoßen sind.
+            Kopieren Sie hierfür einfach den Link aus der Adresszeile Ihres Browsers.
+            Sie können uns über folgende Wege Barrieren melden:
+        </p>
+        <p>
+            <f:variable name="contactFormUri">{f:uri.typolink(parameter: data.tx_barrierfree_contactFormLink, absolute: 1)}</f:variable>
+            Kontaktformular: <f:if condition="contactFormUri"><a href="{contactFormUri}">{contactFormUri}</a></f:if>
+            <br>
+            E-Mail: <f:if condition="{data.tx_barrierfree_email}"><f:link.email email="{data.tx_barrierfree_email}">{data.tx_barrierfree_email}</f:link.email></f:if>
+            <br>
+            Telefon: <a href="tel:{data.tx_barrierfree_phone}">{data.tx_barrierfree_phone}</a>
+            <br>
+            Postanschrift: Stichwort: Barrieren melden. {data.tx_barrierfree_name}, {data.tx_barrierfree_address}, Deutschland
+        </p>
+    </f:render>
+    <f:render section="section" arguments="{headerType:subHeaderType, header:'Durchsetzungsstelle '}" contentAs="content">
+        <p>
+            Sollten Sie auf Mitteilungen oder Anfragen zur Barrierefreiheit keine zufriedenstellenden Antworten erhalten,
+            können Sie sich an die Durchsetzungsstelle wenden.
+            Die Durchsetzungsstelle unterstützt Sie dabei, Ihre Rechte geltend zu machen.
+        </p>
+    </f:render>
+    <f:render section="section" arguments="{headerType:subHeaderType, header:'Adresse der Durchsetzungsstelle'}" contentAs="content">
+        {data.tx_barrierfree_addressOfTheEnforcementBody -> f:format.html()}
+    </f:render>
+
+    <f:render section="section" arguments="{headerType:subHeaderType, header:'Datum der Erstellung dieser Erklärung zur Barrierefreiheit'}" contentAs="content">
+        Diese Erklärung wurde am {f:format.date(date: data.crdate, format: settings.dateFormat)} erstellt.
+        Die Überprüfung der Einhaltung der Anforderungen beruht auf einem Prüfbericht zur digitalen Barrierefreiheit.
+
+        Diese Erklärung zur Barrierefreiheit wurde mit größter Sorgfalt erstellt und wird regelmäßig aktualisiert,
+        um die aktuellen Anforderungen und Standards zu erfüllen.
+        Dennoch können Fehler nicht völlig ausgeschlossen werden.
+        Falls Sie Fehler in dieser Erklärung finden, bitten wir um eine kurze Rückmeldung über die Barrieren Melden Funktionalität,
+        wie sie in diesem Dokument aufgeführt sind.
+
+        Letztes Update dieses Dokuments erfolgte am {f:format.date(date: data.tstamp, format: settings.dateFormat)}.
+    </f:render>
+</f:section>
+</html>
+
+<f:section name="section">
+    <section class="section">
+        <h{headerType}>
+        {header}
+        </h{headerType}>
+        {content -> f:format.raw()}
+    </section>
+</f:section>

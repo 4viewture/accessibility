@@ -1,0 +1,14 @@
+# Customization options for the barrier-free extension
+plugin.tx_accessibility_content {
+    view {
+        # cat=plugin.tx_accessibility_content/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:accessibility/Resources/Private/Templates/
+        # cat=plugin.tx_accessibility_content/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:accessibility/Resources/Private/Partials/
+        # cat=plugin.tx_accessibility_content/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:accessibility/Resources/Private/Layouts/
+    }
+    settings {
+        # Define any plugin-specific constants here
+    }
+}

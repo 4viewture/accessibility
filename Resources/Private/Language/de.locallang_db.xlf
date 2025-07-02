@@ -1,41 +1,43 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2013-02-24T16:26:10Z"
-		  product-name="accessibility">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2023-07-02T12:00:00Z" product-name="accessibility">
 		<header/>
 		<body>
-			<trans-unit id="UpdateTextViaAiControl.title">
-				<source>Text mit AI aktualisieren</source>
-			</trans-unit>
-			<trans-unit id="tt_content.tabs.barrier_free">
-				<source>Barrier Free</source>
-			</trans-unit>
 			<trans-unit id="tt_content.palettes.barrier_free_content">
 				<source>Barrier Free Content</source>
+				<target>Barrierefreier Inhalt</target>
 			</trans-unit>
 			<trans-unit id="tt_content.tx_accessibility_barrier_free_name">
 				<source>Name</source>
+				<target>Name</target>
 			</trans-unit>
 			<trans-unit id="tt_content.tx_accessibility_barrier_free_address">
 				<source>Address</source>
+				<target>Adresse</target>
 			</trans-unit>
 			<trans-unit id="tt_content.tx_accessibility_barrier_free_phone">
 				<source>Phone</source>
+				<target>Telefon</target>
 			</trans-unit>
 			<trans-unit id="tt_content.tx_accessibility_barrier_free_email">
 				<source>Email</source>
+				<target>E-Mail</target>
 			</trans-unit>
 			<trans-unit id="tt_content.tx_accessibility_barrier_free_contactFormLink">
 				<source>Contact Form Link</source>
+				<target>Link zum Kontaktformular</target>
 			</trans-unit>
 			<trans-unit id="tt_content.tx_accessibility_barrier_free_notBarrierFreeContent">
 				<source>Not Barrier Free Content</source>
+				<target>Nicht barrierefreier Inhalt</target>
 			</trans-unit>
 			<trans-unit id="tt_content.tx_accessibility_barrier_free_economic_unreasonable">
 				<source>Not Barrier Free Content Due To Economic Unreasonableness</source>
+				<target>Nicht barrierefreier Inhalt aufgrund wirtschaftlicher Unzumutbarkeit</target>
 			</trans-unit>
 			<trans-unit id="tt_content.tx_accessibility_barrier_free_addressOfTheEnforcementBody">
 				<source>Address Of The Enforcement Body</source>
+				<target>Adresse der Durchsetzungsstelle</target>
 			</trans-unit>
 		</body>
 	</file>
