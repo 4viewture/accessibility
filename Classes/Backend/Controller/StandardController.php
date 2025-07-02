@@ -47,6 +47,24 @@ class StandardController
                 ]
             ]
         ],
+        'externalServicesBarrierFree' => [
+            'uri' => 'https://4viewture.de/barrierefreiheitsErklaerung',
+            'target' => '_blank',
+            'image' => 'EXT:accessibility/Resources/Public/Module/BarrierefreiheitErklaerung.png',
+            'badge' => 'kostenfrei',
+            'badgeClass' => 'badge-warning',
+            'visualBadge' => 'actions-info-circle',
+            'label' => 'Informationen zur Barrierefreiheitserklärung',
+            'description' => 'Nutzen Sie das Plugin zum Erstellen Ihrer Barrierefreiheitserklaerung',
+            'actions' => [
+                [
+                    'uri' => 'https://4viewture.de/produkte/drk-hosting-pilot/begriffe/barrierefreiheitserklaerung/',
+                    'label' => 'Mehr Informationen',
+                    'icon' => 'actions-window-open',
+                    'target' => '_blank'
+                ]
+            ]
+        ],
         'alternativeTextInfo' => [
             'uri' => 'https://4viewture.de/wcag-ai',
             'target' => '_blank',
@@ -99,7 +117,8 @@ class StandardController
                     'target' => '_blank'
                 ]
             ]
-        ]
+        ],
+
     ];
 
     public function __construct(
