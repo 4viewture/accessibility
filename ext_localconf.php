@@ -12,7 +12,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
                     title = Barrier Free Content
                     description = Adds a barrier free content element
                     tt_content_defValues {
-                        CType = accessibility_content
+                        CType = accessibility_barrier_free_content
                     }
                 }
             }
