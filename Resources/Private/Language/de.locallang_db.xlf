@@ -39,6 +39,14 @@
 				<source>Address Of The Enforcement Body</source>
 				<target>Adresse der Durchsetzungsstelle</target>
 			</trans-unit>
+			<trans-unit id="tt_content.tx_accessibility_barrier_free.title">
+				<source>Accessibility statement</source>
+				<target>Barrierefreiheitserklärung</target>
+			</trans-unit>
+			<trans-unit id="tt_content.tx_accessibility_barrier_free.description">
+				<source>An Accessibility Statement is a public document that provides information about the accessibility of a website, application, or digital product</source>
+				<target>Eine Barrierefreiheitserklärung (Accessibility Statement) ist ein Dokument, das öffentlich zugänglich gemacht wird und beschreibT, welche Barrieren in dem Produkt bestehen.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

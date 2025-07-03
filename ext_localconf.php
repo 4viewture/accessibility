@@ -7,16 +7,16 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
     'mod {
         wizards.newContentElement.wizardItems.special {
             elements {
-                accessibility_content {
-                    iconIdentifier = content-special-html
-                    title = Barrier Free Content
-                    description = Adds a barrier free content element
+                accessibility_barrier_free_content {
+                    iconIdentifier = tx-accessibility-barrier-free-content
+                    title = LLL:EXT:accessibility/Resources/Private/Language/locallang_db.xlf:tt_content.tx_accessibility_barrier_free.title
+                    description = LLL:EXT:accessibility/Resources/Private/Language/locallang_db.xlf:tt_content.tx_accessibility_barrier_free.description
                     tt_content_defValues {
                         CType = accessibility_barrier_free_content
                     }
                 }
             }
-            show := addToList(accessibility_content)
+            show := addToList(accessibility_barrier_free_content)
         }
     }'
 );

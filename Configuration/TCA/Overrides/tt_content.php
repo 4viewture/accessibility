@@ -5,9 +5,9 @@ defined('TYPO3') or die();
 // Add the content element to the "special" section of the new content element wizard
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
     [
-        'Barrier Free Content', // The plugin title
+        'LLL:EXT:accessibility/Resources/Private/Language/locallang_db.xlf:tt_content.tx_accessibility_barrier_free.title', // The plugin title
         'accessibility_barrier_free_content', // The plugin key
-        'content-special-html' // Icon identifier
+        'tx-accessibility-barrier-free-content' // Icon identifier
     ],
     'CType', // The field to add it to
     'accessibility' // The extension key

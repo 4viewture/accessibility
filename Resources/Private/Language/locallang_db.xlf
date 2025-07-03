@@ -37,6 +37,12 @@
 			<trans-unit id="tt_content.tx_accessibility_barrier_free_addressOfTheEnforcementBody">
 				<source>Address Of The Enforcement Body</source>
 			</trans-unit>
+			<trans-unit id="tt_content.tx_accessibility_barrier_free.title">
+				<source>Accessibility statement</source>
+			</trans-unit>
+			<trans-unit id="tt_content.tx_accessibility_barrier_free.description">
+				<source>An Accessibility Statement is a public document that provides information about the accessibility of a website, application, or digital product</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
