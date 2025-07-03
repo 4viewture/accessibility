@@ -1,7 +1,7 @@
 
 <html
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:bf="http://typo3.org/ns/Fucodo/BarrierFree/ViewHelpers"
+    xmlns:bf="http://typo3.org/ns/FourViewture/Accessibility/ViewHelpers"
     data-namespace-typo3-fluid="true">
 <f:layout name="Default" />
 
@@ -12,19 +12,19 @@
 
     <f:render section="section" arguments="{headerType:mainHeaderType, header:'Barrierefreiheitserklärung '}" contentAs="content">
         <p>
-            Name und Anschrift des Unternehmens: {data.tx_barrierfree_name}, {data.tx_barrierfree_address}
+            Name und Anschrift des Unternehmens: {data.tx_accessibility_barrier_free_name}, {data.tx_accessibility_barrier_free_address}
             <br>
             Domain: <a href="{site.base}">{site.base.host}</a>
             <br>
-            Telefon: {data.tx_barrierfree_phone}
+            Telefon: {data.tx_accessibility_barrier_free_phone}
             <br>
-            E-Mail: {data.tx_barrierfree_email}
+            E-Mail: {data.tx_accessibility_barrier_free_email}
         </p>
     </f:render>
 
     <f:render section="section" arguments="{headerType:subHeaderType, header:'Einleitung'}" contentAs="content">
         <p>
-            Der {data.tx_barrierfree_name} ist bestrebt, seine Website {site.base.host} in Übereinstimmung mit dem
+            Der {data.tx_accessibility_barrier_free_name} ist bestrebt, seine Website {site.base.host} in Übereinstimmung mit dem
             Barrierefreiheitsstärkungsgesetz (BFSG) barrierefrei zugänglich zu machen.
             Diese Erklärung zur Barrierefreiheit gilt für die Website {site.base.host}.
         </p>
@@ -40,13 +40,13 @@
         <p>
             Die nachstehend aufgeführten Inhalte sind aus den folgenden Gründen nicht barrierefrei:
         </p>
-        {data.tx_barrierfree_notBarrierFreeContent -> f:format.html()}
+        {data.tx_accessibility_barrier_free_notBarrierFreeContent -> f:format.html()}
     </f:render>
     <f:render section="section" arguments="{headerType:subHeaderType, header:'Barrieren aufgrund wirtschaftlicher Unzumutbarkeit'}" contentAs="content">
         <p>
             Einige Barrieren auf unserer Website können aus Gründen der wirtschaftlichen Zumutbarkeit nicht kurzfristig behoben werden. Dazu gehören:
         </p>
-        {data.tx_barrierfree_notBarrierFreeContentDueToEconomicUnreasonableness -> f:format.html()}
+        {data.tx_accessibility_barrier_free_notBarrierFreeContentDueToEconomicUnreasonableness -> f:format.html()}
     </f:render>
     <f:render section="section" arguments="{headerType:subHeaderType, header:'Barrieren Melden, Feedback und Kontaktangaben'}" contentAs="content">
         <p>
@@ -59,14 +59,14 @@
             Sie können uns über folgende Wege Barrieren melden:
         </p>
         <p>
-            <f:variable name="contactFormUri">{f:uri.typolink(parameter: data.tx_barrierfree_contactFormLink, absolute: 1)}</f:variable>
+            <f:variable name="contactFormUri">{f:uri.typolink(parameter: data.tx_accessibility_barrier_free_contactFormLink, absolute: 1)}</f:variable>
             Kontaktformular: <f:if condition="contactFormUri"><a href="{contactFormUri}">{contactFormUri}</a></f:if>
             <br>
-            E-Mail: <f:if condition="{data.tx_barrierfree_email}"><f:link.email email="{data.tx_barrierfree_email}">{data.tx_barrierfree_email}</f:link.email></f:if>
+            E-Mail: <f:if condition="{data.tx_accessibility_barrier_free_email}"><f:link.email email="{data.tx_accessibility_barrier_free_email}">{data.tx_accessibility_barrier_free_email}</f:link.email></f:if>
             <br>
-            Telefon: <a href="tel:{data.tx_barrierfree_phone}">{data.tx_barrierfree_phone}</a>
+            Telefon: <a href="tel:{data.tx_accessibility_barrier_free_phone}">{data.tx_accessibility_barrier_free_phone}</a>
             <br>
-            Postanschrift: Stichwort: Barrieren melden. {data.tx_barrierfree_name}, {data.tx_barrierfree_address}, Deutschland
+            Postanschrift: Stichwort: Barrieren melden. {data.tx_accessibility_barrier_free_name}, {data.tx_accessibility_barrier_free_address}, Deutschland
         </p>
     </f:render>
     <f:render section="section" arguments="{headerType:subHeaderType, header:'Durchsetzungsstelle '}" contentAs="content">
@@ -77,7 +77,7 @@
         </p>
     </f:render>
     <f:render section="section" arguments="{headerType:subHeaderType, header:'Adresse der Durchsetzungsstelle'}" contentAs="content">
-        {data.tx_barrierfree_addressOfTheEnforcementBody -> f:format.html()}
+        {data.tx_accessibility_barrier_free_addressOfTheEnforcementBody -> f:format.html()}
     </f:render>
 
     <f:render section="section" arguments="{headerType:subHeaderType, header:'Datum der Erstellung dieser Erklärung zur Barrierefreiheit'}" contentAs="content">
