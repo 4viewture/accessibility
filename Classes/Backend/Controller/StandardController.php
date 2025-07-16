@@ -48,7 +48,7 @@ class StandardController
             ]
         ],
         'externalServicesBarrierFree' => [
-            'uri' => 'https://4viewture.de/barrierefreiheitsErklaerung',
+            'uri' => 'https://4viewture.de/produkte/drk-hosting-pilot/begriffe/barrierefreiheitserklaerung/',
             'target' => '_blank',
             'image' => 'EXT:accessibility/Resources/Public/Module/BarrierefreiheitErklaerung.png',
             'badge' => 'kostenfrei',
@@ -66,7 +66,7 @@ class StandardController
             ]
         ],
         'alternativeTextInfo' => [
-            'uri' => 'https://4viewture.de/wcag-ai',
+            'uri' => 'https://4viewture.de/produkte/drk-hosting-pilot/begriffe/alternativtext/',
             'target' => '_blank',
             'image' => 'EXT:accessibility/Resources/Public/Module/BarrierefreiheitAlt.png',
             'badge' => 'kostenfrei',
