@@ -12,7 +12,7 @@ class SumViewHelper extends AbstractViewHelper
         $this->registerArgument('b', 'mixed', 'Optional: Second number or Iterator/Traversable/Array for calculation');
     }
 
-    protected function render(): int
+    public function render(): int
     {
         return (int)$this->arguments['a'] + (int)$this->arguments['b'];
     }

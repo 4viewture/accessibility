@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 
 class HelpTextElement extends AbstractFormElement
 {
-    public function render()
+    public function render():array
     {
         $resultArray = $this->initializeResultArray();
         $resultArray['html'] = $this->renderView(

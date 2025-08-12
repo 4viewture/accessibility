@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Page\JavaScriptModuleInstruction;
 
 class UpdateTextViaAiControl extends AbstractNode
 {
-    public function render()
+    public function render(): array
     {
         $result = [
             'iconIdentifier' => 'actions-accessibility',
