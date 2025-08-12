@@ -19,7 +19,7 @@
 	],
 	"homepage": "https:\/\/www.4viewture.de",
 	"require": {
-		"typo3\/cms-core": "^12.4"
+		"typo3\/cms-core": "^12.4 || ^13.4"
 	},
 	"require-dev": {
 		"phpunit\/phpunit": "^5.6"
