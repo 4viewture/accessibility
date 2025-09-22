@@ -2,6 +2,13 @@
 
 defined('TYPO3') or die();
 
+// Register static TypoScript
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    'accessibility',
+    'Configuration/TypoScript',
+    'Accessibility Barrier Free Content'
+);
+
 // Add the content element to the "special" section of the new content element wizard
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
     [
