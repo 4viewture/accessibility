@@ -8,9 +8,11 @@
 <f:section name="Content">
     <f:if condition="{menuEntries}">
         <f:then>
-            <div class="card-container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
                 <f:for each="{menuEntries}" as="menuEntry">
-                    <f:render section="toolCard" arguments="{menuEntry:menuEntry}" />
+                    <div class="col">
+                        <f:render section="toolCard" arguments="{menuEntry:menuEntry}" />
+                    </div>
                 </f:for>
             </div>
         </f:then>
