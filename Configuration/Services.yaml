@@ -13,3 +13,5 @@ services:
   FourViewture\Accessibility\Backend\Controller\ImageAlternativeTextController:
     tags:
       - backend.controller
+  FourViewture\Accessibility\Backend\Controller\AiProxyController:
+    public: true
