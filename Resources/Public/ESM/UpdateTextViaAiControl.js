@@ -36,11 +36,11 @@
     return { overlay, modal, close };
   }
 
-  function spinnerMarkup(counterStart = 0) {
+  function spinnerMarkup(counterStart = 0, waitingPrefix = 'Waiting for AI result…', secondsSuffix = 's') {
     return `
       <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
         <div class="lds-dual-ring"></div>
-        <div>Waiting for AI result… <span data-ai-counter>${counterStart}</span>s</div>
+        <div>${waitingPrefix} <span data-ai-counter>${counterStart}</span>${secondsSuffix}</div>
       </div>
       <style>
         .lds-dual-ring {
@@ -222,41 +222,46 @@
     const uid = btn.getAttribute('data-uid') || '';
     const pid = parseInt(btn.getAttribute('data-pid') || '0', 10) || 0;
 
+    // Localized labels provided by PHP control via data-* attributes
+    const i18n = {
+      title: btn.dataset.i18nTitle || 'Generating text via AI…',
+      waitingPrefix: btn.dataset.i18nWaitingPrefix || 'Waiting for AI result…',
+      secondsSuffix: btn.dataset.i18nSecondsSuffix || 's',
+      close: btn.dataset.i18nClose || 'Close',
+      errDescribeMissing: btn.dataset.i18nErrorDescribeMissing || 'AJAX route not found: accessibility_ai_describe',
+      errStatusResultMissing: btn.dataset.i18nErrorStatusResultMissing || 'AJAX routes not found for status/result',
+      errMissingId: btn.dataset.i18nErrorMissingId || 'Missing id from describe',
+      errTimeout: btn.dataset.i18nErrorTimeout || 'The AI did not finish in time. Please try again later.',
+      errNoResult: btn.dataset.i18nErrorNoResult || 'No result received.',
+    };
+
     const fieldInput = findFieldInput(table, uid, field, btn);
 
+    // Create a minimal modal that starts immediately (no user input required)
     const modal = createModal(`
-      <h3 style="margin-top:0;margin-bottom:8px;">Generate text via AI</h3>
+      <h3 style="margin-top:0;margin-bottom:8px;">${i18n.title}</h3>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <label>Image URL <input type="url" data-ai-image-url placeholder="https://..." style="width:100%" /></label>
-        <label>Context <input type="text" data-ai-context placeholder="What is this used for?" style="width:100%" /></label>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
-          <button data-ai-cancel type="button">Cancel</button>
-          <button data-ai-start type="button" class="btn btn-primary">Start</button>
-        </div>
-        <div data-ai-progress style="display:none;">${spinnerMarkup(0)}</div>
+        <div data-ai-progress>${spinnerMarkup(0, i18n.waitingPrefix, i18n.secondsSuffix)}</div>
         <div data-ai-message style="color:#a00;"></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
+          <button data-ai-cancel type="button">${i18n.close}</button>
+        </div>
       </div>
     `);
 
     const $ = (sel) => modal.modal.querySelector(sel);
 
     $('button[data-ai-cancel]').addEventListener('click', modal.close);
-    $('button[data-ai-start]').addEventListener('click', async () => {
-      const imageUrl = ($('input[data-ai-image-url]').value || '').trim();
-      const context = ($('input[data-ai-context]').value || '').trim();
+
+    (async () => {
       const msg = $('[data-ai-message]');
       msg.textContent = '';
-      if (!imageUrl || !context) {
-        msg.textContent = 'Please provide both image URL and context.';
-        return;
-      }
       const describeUrl = ajaxUrl(AJAX_KEYS.describe);
       if (!describeUrl) {
-        msg.textContent = 'AJAX route not found: accessibility_ai_describe';
+        msg.textContent = i18n.errDescribeMissing;
         return;
       }
 
-      $('[data-ai-progress]').style.display = 'block';
       let counter = 0;
       const counterEl = modal.modal.querySelector('[data-ai-counter]');
       const counterTimer = setInterval(() => {
@@ -265,10 +270,9 @@
       }, 1000);
 
       try {
-        // Step 1: POST /describe via proxy
-        // Also send table, uid and field as requested so the backend/proxy can use it later
-        const { id } = await postJson(describeUrl, { imageUrl, context, pid, table, uid, field });
-        if (!id) throw new Error('Missing id from describe');
+        // Step 1: POST /describe via proxy immediately with structural info only
+        const { id } = await postJson(describeUrl, { pid, table, uid, field });
+        if (!id) throw new Error(i18n.errMissingId);
 
         // Store id in the webcomponent/modal for later requests
         modal.modal.dataset.aiId = id;
@@ -278,7 +282,7 @@
         const statusBaseUrl = ajaxUrl(AJAX_KEYS.status);
         const resultBaseUrl = ajaxUrl(AJAX_KEYS.result);
         if (!statusBaseUrl || !resultBaseUrl) {
-          throw new Error('AJAX routes not found for status/result');
+          throw new Error(i18n.errStatusResultMissing);
         }
 
         let processed = false;
@@ -289,13 +293,13 @@
           await new Promise(r => setTimeout(r, 1000));
         }
         if (!processed) {
-          throw new Error('The AI did not finish in time. Please try again later.');
+          throw new Error(i18n.errTimeout);
         }
 
         // Step 3: fetch result
         const resultJson = await getJson(appendQuery(resultBaseUrl, 'id', id));
         const text = (resultJson && resultJson.result) || '';
-        if (!text) throw new Error('No result received.');
+        if (!text) throw new Error(i18n.errNoResult);
 
         // Step 4: write into field
         if (fieldInput) {
@@ -322,7 +326,7 @@
         const progress = $('[data-ai-progress]');
         if (progress) progress.style.display = 'none';
       }
-    });
+    })();
   }
 
   function init() {

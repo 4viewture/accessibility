@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" product-name="accessibility">
+    <header/>
+    <body>
+      <trans-unit id="js.wizard.title">
+        <source>Generating text via AI…</source>
+      </trans-unit>
+      <trans-unit id="js.wizard.waitingPrefix">
+        <source>Waiting for AI result…</source>
+      </trans-unit>
+      <trans-unit id="js.wizard.secondsSuffix">
+        <source>s</source>
+      </trans-unit>
+      <trans-unit id="js.wizard.close">
+        <source>Close</source>
+      </trans-unit>
+
+      <trans-unit id="js.error.ajaxRouteMissingDescribe">
+        <source>AJAX route not found: accessibility_ai_describe</source>
+      </trans-unit>
+      <trans-unit id="js.error.ajaxRouteMissingStatusResult">
+        <source>AJAX routes not found for status/result</source>
+      </trans-unit>
+      <trans-unit id="js.error.missingId">
+        <source>Missing id from describe</source>
+      </trans-unit>
+      <trans-unit id="js.error.timeout">
+        <source>The AI did not finish in time. Please try again later.</source>
+      </trans-unit>
+      <trans-unit id="js.error.noResult">
+        <source>No result received.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

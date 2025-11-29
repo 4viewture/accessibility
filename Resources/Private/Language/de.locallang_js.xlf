@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2023-07-02T12:00:00Z"
+		  product-name="accessibility">
+		<header/>
+		<body>
+			<trans-unit id="js.wizard.title">
+				<target>Text wird per KI erzeugt…</target>
+			</trans-unit>
+			<trans-unit id="js.wizard.waitingPrefix">
+				<target>Warte auf KI-Ergebnis…</target>
+			</trans-unit>
+			<trans-unit id="js.wizard.secondsSuffix">
+				<target>s</target>
+			</trans-unit>
+			<trans-unit id="js.wizard.close">
+				<target>Schließen</target>
+			</trans-unit>
+
+			<trans-unit id="js.error.ajaxRouteMissingDescribe">
+				<target>AJAX-Route nicht gefunden: accessibility_ai_describe</target>
+			</trans-unit>
+			<trans-unit id="js.error.ajaxRouteMissingStatusResult">
+				<target>AJAX-Routen für Status/Ergebnis nicht gefunden</target>
+			</trans-unit>
+			<trans-unit id="js.error.missingId">
+				<target>Fehlende ID in Antwort</target>
+			</trans-unit>
+			<trans-unit id="js.error.timeout">
+				<target>Die KI hat nicht rechtzeitig fertiggestellt. Bitte später erneut versuchen.</target>
+			</trans-unit>
+			<trans-unit id="js.error.noResult">
+				<target>Kein Ergebnis empfangen.</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
