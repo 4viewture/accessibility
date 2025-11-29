@@ -40,6 +40,7 @@ class UpdateTextViaAiControl extends AbstractNode
                 'data-i18n-error-missing-id' => (string)$GLOBALS['LANG']->sL('LLL:EXT:accessibility/Resources/Private/Language/locallang_js.xlf:js.error.missingId') ?: 'Missing id from describe',
                 'data-i18n-error-timeout' => (string)$GLOBALS['LANG']->sL('LLL:EXT:accessibility/Resources/Private/Language/locallang_js.xlf:js.error.timeout') ?: 'The AI did not finish in time. Please try again later.',
                 'data-i18n-error-no-result' => (string)$GLOBALS['LANG']->sL('LLL:EXT:accessibility/Resources/Private/Language/locallang_js.xlf:js.error.noResult') ?: 'No result received.',
+                'data-image-uri' => $publicResourceWebPath = \TYPO3\CMS\Core\Utility\PathUtility::getPublicResourceWebPath('EXT:accessibility/Resources/Public/Icons/robot.svg')
             ],
             'javaScriptModules' => [
                 JavaScriptModuleInstruction::create('@4viewture/accessibility/UpdateTextViaAiControl.js')

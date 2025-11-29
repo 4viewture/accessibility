@@ -1,0 +1,177 @@
+<svg
+    viewBox="0 0 400 400"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-labelledby="title desc"
+>
+    <title id="title">Thinking assistant robot</title>
+    <desc id="desc">
+        A friendly robot with subtle animated glow and floating dots to indicate thinking.
+    </desc>
+
+    <style>
+        /* Background gradient */
+        .bg {
+        fill: url(#bgGrad);
+        }
+
+        /* Robot base colors */
+        .robot-body {
+        fill: #f5f8ff;
+        }
+        .robot-shadow {
+        fill: #d2ddf5;
+        }
+        .visor {
+        fill: #0f1630;
+        }
+
+        /* Lights */
+        .eye {
+        fill: #5ee0ff;
+        opacity: 0.9;
+        animation: blink 4s infinite;
+        }
+        .eye.right {
+        animation-delay: 0.25s;
+        }
+
+        .chest-light {
+        fill: #5ee0ff;
+        animation: chestPulse 2.2s ease-in-out infinite;
+        }
+
+        .head-glow {
+        fill: url(#headGlowGrad);
+        opacity: 0.0;
+        animation: headGlow 3s ease-in-out infinite;
+        }
+
+        .think-dot {
+        fill: #5ee0ff;
+        opacity: 0.0;
+        animation: thinkDots 2.8s ease-in-out infinite;
+        }
+        .think-dot.dot2 {
+        animation-delay: 0.35s;
+        }
+        .think-dot.dot3 {
+        animation-delay: 0.7s;
+        }
+
+        /* Animations */
+        @keyframes chestPulse {
+        0%, 100% {
+        opacity: 0.7;
+        transform: scale(1);
+        }
+        50% {
+        opacity: 1;
+        transform: scale(1.12);
+        }
+        }
+
+        @keyframes headGlow {
+        0%, 100% {
+        opacity: 0.0;
+        transform: scale(1);
+        }
+        50% {
+        opacity: 0.4;
+        transform: scale(1.05);
+        }
+        }
+
+        @keyframes thinkDots {
+        0% {
+        opacity: 0.0;
+        transform: translateY(6px);
+        }
+        40% {
+        opacity: 0.9;
+        transform: translateY(0px);
+        }
+        80% {
+        opacity: 0.0;
+        transform: translateY(-6px);
+        }
+        100% {
+        opacity: 0.0;
+        transform: translateY(-10px);
+        }
+        }
+
+        @keyframes blink {
+        0%, 46%, 52%, 100% {
+        transform: scaleY(1);
+        }
+        48%, 50% {
+        transform: scaleY(0.15);
+        }
+        }
+    </style>
+
+    <!-- Background -->
+    <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#182a68"/>
+            <stop offset="50%" stop-color="#203b8a"/>
+            <stop offset="100%" stop-color="#132143"/>
+        </linearGradient>
+
+        <radialGradient id="headGlowGrad" cx="50%" cy="35%" r="40%">
+            <stop offset="0%" stop-color="#5ee0ff" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#5ee0ff" stop-opacity="0"/>
+        </radialGradient>
+    </defs>
+
+    <rect class="bg" x="0" y="0" width="400" height="400" rx="32" />
+
+    <!-- Soft glow behind head -->
+    <ellipse class="head-glow" cx="200" cy="125" rx="110" ry="80" />
+
+    <!-- Floating thinking dots above head -->
+    <circle class="think-dot dot1" cx="200" cy="40" r="4" />
+    <circle class="think-dot dot2" cx="215" cy="32" r="4" />
+    <circle class="think-dot dot3" cx="230" cy="26" r="4" />
+
+    <!-- Body shadow -->
+    <ellipse class="robot-shadow" cx="200" cy="320" rx="85" ry="22" opacity="0.5"/>
+
+    <!-- Torso -->
+    <g transform="translate(200, 215)">
+        <rect class="robot-body" x="-60" y="-40" width="120" height="105" rx="34" />
+        <!-- Chest ring -->
+        <circle cx="0" cy="5" r="24" fill="#d2edff" />
+        <!-- Chest light -->
+        <circle class="chest-light" cx="0" cy="5" r="16" />
+    </g>
+
+    <!-- Arms -->
+    <g>
+        <!-- Left arm -->
+        <g transform="translate(120, 210)">
+            <rect class="robot-body" x="-28" y="-28" width="36" height="70" rx="18" />
+            <circle class="robot-body" cx="-10" cy="50" r="16" />
+        </g>
+        <!-- Right arm -->
+        <g transform="translate(280, 210)">
+            <rect class="robot-body" x="-8" y="-28" width="36" height="70" rx="18" />
+            <circle class="robot-body" cx="18" cy="50" r="16" />
+        </g>
+    </g>
+
+    <!-- Head + face -->
+    <g transform="translate(200, 130)">
+        <!-- Head base -->
+        <rect class="robot-body" x="-80" y="-65" width="160" height="120" rx="60" />
+        <!-- Side "ears" -->
+        <circle class="robot-body" cx="-78" cy="0" r="20" />
+        <circle class="robot-body" cx="78" cy="0" r="20" />
+        <!-- Visor -->
+        <rect class="visor" x="-62" y="-40" width="124" height="80" rx="40" />
+        <!-- Eyes -->
+        <ellipse class="eye left" cx="-26" cy="0" rx="12" ry="18" />
+        <ellipse class="eye right" cx="26" cy="0" rx="12" ry="18" />
+    </g>
+</svg>
