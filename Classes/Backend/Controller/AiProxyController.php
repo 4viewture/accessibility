@@ -11,6 +11,8 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Core\Resource\FileRepository;
 
 class AiProxyController
 {
@@ -25,12 +27,19 @@ class AiProxyController
     public function describe(ServerRequestInterface $request): ResponseInterface
     {
         $data = $this->getJsonBody($request);
-        $imageUrl = (string)($data['imageUrl'] ?? '');
-        $context = (string)($data['context'] ?? '');
         $pid = (int)($data['pid'] ?? 0);
+        $table = (string)($data['table'] ?? '');
+        $field = (string)($data['field'] ?? '');
+        $uid = (int)($data['uid'] ?? 0);
 
+        // Derive imageUrl and context on the server based on table/uid/field
+        try {
+            [$imageUrl, $context] = $this->deriveDescribePayload($pid, $table, $uid, $field);
+        } catch (\Throwable $e) {
+            return $this->json(['error' => 'Could not derive image/context: ' . $e->getMessage()], 400);
+        }
         if ($imageUrl === '' || $context === '') {
-            return $this->json(['error' => 'Missing imageUrl or context'], 400);
+            return $this->json(['error' => 'Missing imageUrl or context after derivation'], 400);
         }
 
         $token = $this->resolveToken($pid);
@@ -56,6 +65,147 @@ class AiProxyController
         } catch (\Throwable $e) {
             return $this->json(['error' => 'Proxy error: ' . $e->getMessage()], 500);
         }
+    }
+
+    /**
+     * Derive the external API payload (imageUrl, context) from TYPO3 context
+     */
+    private function deriveDescribePayload(int $pid, string $table, int $uid, string $field): array
+    {
+        $imageUrl = '';
+        $context = '';
+
+        // 1) Try to resolve image URL
+        $imageUrl = $this->resolveImageUrl($table, $uid, $field);
+        if ($imageUrl === '' && $table === 'sys_file_metadata' && $uid > 0) {
+            // Special handling: metadata row points to sys_file via 'file'
+            $meta = BackendUtility::getRecord('sys_file_metadata', $uid, 'file,title,alternative');
+            if ($meta && !empty($meta['file'])) {
+                $imageUrl = $this->resolveFilePublicUrl((int)$meta['file']);
+            }
+        }
+
+        // 2) Derive context: table/field label + record title + page title if available
+        $context = $this->resolveContext($pid, $table, $uid, $field);
+
+        if ($imageUrl === '' || $context === '') {
+            // Provide helpful details for debugging
+            $parts = [];
+            if ($imageUrl === '') { $parts[] = 'imageUrl'; }
+            if ($context === '') { $parts[] = 'context'; }
+            throw new \RuntimeException('Unable to determine: ' . implode(', ', $parts));
+        }
+
+        return [$imageUrl, $context];
+    }
+
+    private function resolveImageUrl(string $table, int $uid, string $field): string
+    {
+        if ($uid <= 0 || $table === '') {
+            return '';
+        }
+
+        // Case A: relation via sys_file_reference on given table/field
+        try {
+            /** @var FileRepository $fileRepository */
+            $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+            $references = $fileRepository->findByRelation($table, $field, $uid);
+            if (!empty($references)) {
+                $ref = $references[0];
+                $original = $ref->getOriginalFile();
+                $url = $original->getPublicUrl();
+                if (is_string($url) && $url !== '') {
+                    return $this->absoluteUrl($url);
+                }
+            }
+        } catch (\Throwable) {
+            // ignore and continue fallbacks
+        }
+
+        // Case B: if table is sys_file and uid points to a file
+        if ($table === 'sys_file' && $uid > 0) {
+            return $this->resolveFilePublicUrl($uid);
+        }
+
+        return '';
+    }
+
+    private function resolveFilePublicUrl(int $fileUid): string
+    {
+        try {
+            /** @var ResourceFactory $resourceFactory */
+            $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+            $file = $resourceFactory->getFileObject($fileUid);
+            $url = $file->getPublicUrl();
+            if (is_string($url) && $url !== '') {
+                return $this->absoluteUrl($url);
+            }
+        } catch (\Throwable) {
+        }
+        return '';
+    }
+
+    private function absoluteUrl(string $url): string
+    {
+        // If already absolute, return as-is
+        if (preg_match('#^https?://#i', $url)) {
+            return $url;
+        }
+        // Build absolute from current backend host
+        $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? '';
+        if ($host !== '') {
+            return rtrim($scheme . '://' . $host, '/') . '/' . ltrim($url, '/');
+        }
+        return $url;
+    }
+
+    private function resolveContext(int $pid, string $table, int $uid, string $field): string
+    {
+        $parts = [];
+
+        // Record title (if available)
+        if ($table !== '' && $uid > 0) {
+            $row = BackendUtility::getRecord($table, $uid) ?? [];
+            $title = '';
+            try {
+                $title = (string)BackendUtility::getRecordTitle($table, $row, true);
+            } catch (\Throwable) {
+                // Fallback to common fields
+                foreach (['title','header','name','label','uid'] as $f) {
+                    if (!empty($row[$f])) { $title = (string)$row[$f]; break; }
+                }
+            }
+            if ($title !== '') {
+                $parts[] = $title;
+            }
+        }
+
+        // Field label
+        if ($table !== '' && $field !== '') {
+            try {
+                $label = (string)BackendUtility::getItemLabel($table, $field);
+                if ($label !== '') {
+                    $parts[] = $label;
+                }
+            } catch (\Throwable) {
+                $parts[] = $table . '.' . $field;
+            }
+        }
+
+        // Page title
+        if ($pid > 0) {
+            $page = BackendUtility::getRecord('pages', $pid, 'title');
+            if ($page && !empty($page['title'])) {
+                $parts[] = 'on page: ' . (string)$page['title'];
+            }
+        }
+
+        $text = trim(implode(' – ', array_filter($parts)));
+        if ($text === '') {
+            $text = 'Image description request for ' . ($table ?: 'record') . ' #' . $uid . ' (' . $field . ')';
+        }
+        return $text;
     }
 
     public function status(ServerRequestInterface $request): ResponseInterface
