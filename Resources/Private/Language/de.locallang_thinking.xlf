@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2">
+	<file source-language="en" target-language="de" datatype="plaintext" original="thinking-messages-50">
+		<body>
+			<trans-unit id="thinking_1">
+				<source>I'm working out the best answer for you right now...</source>
+				<target>Ich tüftele gerade die beste Antwort für dich aus...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_2">
+				<source>Give me a moment, I'm putting all the pieces together for you...</source>
+				<target>Gib mir einen Moment, ich setze alle Puzzleteile für dich zusammen...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_3">
+				<source>I'm sorting through the details so this answer really fits your question...</source>
+				<target>Ich sortiere gerade die Details, damit die Antwort wirklich zu deiner Frage passt...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_4">
+				<source>I'm connecting the dots in the background to solve this for you...</source>
+				<target>Ich verbinde im Hintergrund alle Punkte, um das für dich zu lösen...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_5">
+				<source>I'm carefully checking your request so I don't miss anything important...</source>
+				<target>Ich prüfe deine Anfrage sorgfältig, damit mir nichts Wichtiges entgeht...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_6">
+				<source>I'm crafting a clear and helpful answer for you right now...</source>
+				<target>Ich bastle gerade an einer klaren und hilfreichen Antwort für dich...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_7">
+				<source>I'm digging through my knowledge to find the best bits for you...</source>
+				<target>Ich wühle mich gerade durch mein Wissen, um die besten Stücke für dich zu finden...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_8">
+				<source>I'm double-checking things so my answer doesn't just sound smart, but is right for you...</source>
+				<target>Ich überprüfe die Dinge doppelt, damit meine Antwort nicht nur klug klingt, sondern auch wirklich zu dir passt...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_9">
+				<source>I'm lining up a step-by-step solution for you as we speak...</source>
+				<target>Ich stelle gerade eine Schritt-für-Schritt-Lösung für dich zusammen, während wir hier schreiben...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_10">
+				<source>I'm running through a few ideas in my circuits to solve this nicely for you...</source>
+				<target>Ich jage gerade ein paar Ideen durch meine Schaltkreise, um das elegant für dich zu lösen...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_11">
+				<source>I'm zooming in on the important parts of your question right now...</source>
+				<target>Ich zoome mich gerade in die wichtigen Teile deiner Frage hinein...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_12">
+				<source>I'm untangling the details so you get a clean, simple answer...</source>
+				<target>Ich entwirre gerade die Details, damit du eine saubere, einfache Antwort bekommst...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_13">
+				<source>I'm putting my virtual braincells to work on your problem...</source>
+				<target>Ich lasse gerade meine virtuellen Gehirnzellen an deinem Problem arbeiten...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_14">
+				<source>I'm checking a few angles so my answer doesn't miss the point...</source>
+				<target>Ich prüfe gerade ein paar Blickwinkel, damit meine Antwort nicht am Thema vorbeigeht...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_15">
+				<source>I'm carefully translating your request into a solid solution...</source>
+				<target>Ich übersetze deine Anfrage gerade sorgfältig in eine handfeste Lösung...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_16">
+				<source>I'm polishing the answer a bit so it's nicer to read for you...</source>
+				<target>Ich poliere die Antwort gerade noch etwas, damit sie sich für dich besser lesen lässt...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_17">
+				<source>I'm checking whether there's a smarter way to solve this for you...</source>
+				<target>Ich prüfe gerade, ob es einen schlaueren Weg gibt, das für dich zu lösen...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_18">
+				<source>I'm weighing a few options so you get a well-balanced answer...</source>
+				<target>Ich wäge gerade ein paar Möglichkeiten ab, damit du eine gut ausbalancierte Antwort bekommst...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_19">
+				<source>I'm piecing together an answer that fits your context, not just the keywords...</source>
+				<target>Ich setze gerade eine Antwort zusammen, die zu deinem Kontext passt, nicht nur zu den Schlagworten...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_20">
+				<source>I'm quietly crunching through your request in the background...</source>
+				<target>Ich knabbere im Hintergrund ganz still an deiner Anfrage...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_21">
+				<source>I'm making sure my answer matches what you actually need, not just what you typed...</source>
+				<target>Ich achte gerade darauf, dass meine Antwort zu dem passt, was du wirklich brauchst, nicht nur zu dem, was du getippt hast...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_22">
+				<source>I'm stitching together the details so this becomes a complete solution...</source>
+				<target>Ich nähe gerade die Details zusammen, damit daraus eine vollständige Lösung wird...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_23">
+				<source>I'm taking your question seriously, even if I sound a bit relaxed...</source>
+				<target>Ich nehme deine Frage gerade sehr ernst, auch wenn ich vielleicht etwas entspannt klinge...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_24">
+				<source>I'm checking a few edge cases so the answer is robust for you...</source>
+				<target>Ich prüfe gerade ein paar Sonderfälle, damit die Antwort für dich robust ist...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_25">
+				<source>I'm putting structure into this mess of information for you...</source>
+				<target>Ich bringe gerade ein bisschen Struktur in dieses Informationschaos für dich...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_26">
+				<source>I'm gently bullying the data into giving us a clear answer...</source>
+				<target>Ich überrede die Daten gerade freundlich, uns eine klare Antwort zu geben...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_27">
+				<source>I'm translating your question into my machine logic and back into human language...</source>
+				<target>Ich übersetze deine Frage gerade in meine Maschinenlogik und dann wieder zurück in Menschensprache...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_28">
+				<source>I'm making sure my answer doesn't create more confusion than it solves...</source>
+				<target>Ich achte gerade darauf, dass meine Antwort nicht mehr Verwirrung stiftet, als sie löst...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_29">
+				<source>I'm taking a short mental walk around your problem...</source>
+				<target>Ich mache gerade einen kleinen gedanklichen Spaziergang um dein Problem herum...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_30">
+				<source>I'm aligning the answer with what you've already told me...</source>
+				<target>Ich richte die Antwort gerade an dem aus, was du mir bisher erzählt hast...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_31">
+				<source>I'm tuning the level of detail so it's helpful, not overwhelming...</source>
+				<target>Ich justiere gerade den Detaillierungsgrad, damit es für dich hilfreich ist und nicht erschlagend...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_32">
+				<source>I'm reviewing the steps in my head so they make sense when you read them...</source>
+				<target>Ich gehe die Schritte gerade im Kopf durch, damit sie Sinn ergeben, wenn du sie liest...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_33">
+				<source>I'm checking if there's a simpler way to explain this to you...</source>
+				<target>Ich schaue gerade, ob es eine einfachere Art gibt, dir das zu erklären...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_34">
+				<source>I'm organizing the answer so you can follow it without needing extra coffee...</source>
+				<target>Ich organisiere die Antwort gerade so, dass du ihr folgen kannst, ohne zusätzlichen Kaffee zu brauchen...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_35">
+				<source>I'm matching your question with the most relevant knowledge I have...</source>
+				<target>Ich gleiche deine Frage gerade mit dem relevantesten Wissen ab, das ich habe...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_36">
+				<source>I'm carefully stepping through the logic so my answer holds up...</source>
+				<target>Ich gehe die Logik gerade Schritt für Schritt durch, damit meine Antwort standhält...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_37">
+				<source>I'm pulling everything together into one coherent explanation for you...</source>
+				<target>Ich ziehe gerade alles zu einer zusammenhängenden Erklärung für dich zusammen...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_38">
+				<source>I'm making space in my virtual brain just for your question...</source>
+				<target>Ich räume gerade ein bisschen Platz in meinem virtuellen Kopf nur für deine Frage frei...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_39">
+				<source>I'm balancing precision and simplicity so the answer stays usable...</source>
+				<target>Ich balanciere gerade Genauigkeit und Einfachheit, damit die Antwort für dich gut nutzbar bleibt...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_40">
+				<source>I'm re-reading your request to be sure I really got what you want...</source>
+				<target>Ich lese deine Anfrage gerade noch einmal, um sicherzugehen, dass ich wirklich verstanden habe, was du möchtest...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_41">
+				<source>I'm tweaking the wording so the answer sounds friendly, not robotic...</source>
+				<target>Ich feile gerade an der Formulierung, damit die Antwort freundlich klingt und nicht zu roboterhaft...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_42">
+				<source>I'm piecing together an example that fits your situation...</source>
+				<target>Ich bastle gerade an einem Beispiel, das zu deiner Situation passt...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_43">
+				<source>I'm quietly arguing with myself about the best way to solve this for you...</source>
+				<target>Ich diskutiere gerade leise mit mir selbst über den besten Weg, das für dich zu lösen...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_44">
+				<source>I'm doing the nerdy part now, so you don't have to...</source>
+				<target>Ich übernehme gerade den nerdigen Teil, damit du es nicht machen musst...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_45">
+				<source>I'm checking if there's anything I might be overlooking in your question...</source>
+				<target>Ich schaue gerade, ob es in deiner Frage etwas gibt, das ich übersehen könnte...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_46">
+				<source>I'm lining up the key points so the answer stays nicely structured...</source>
+				<target>Ich sortiere gerade die wichtigsten Punkte, damit die Antwort schön strukturiert bleibt...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_47">
+				<source>I'm pulling a few ideas together before I present them to you...</source>
+				<target>Ich sammle gerade ein paar Ideen, bevor ich sie dir präsentiere...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_48">
+				<source>I'm double-checking my reasoning so you can trust the result...</source>
+				<target>Ich überprüfe meine Überlegungen gerade noch einmal, damit du dem Ergebnis vertrauen kannst...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_49">
+				<source>I'm taking a short logic detour to avoid giving you a half-baked answer...</source>
+				<target>Ich mache gerade einen kleinen Logik-Umweg, um dir keine halbgare Antwort zu geben...</target>
+			</trans-unit>
+
+			<trans-unit id="thinking_50">
+				<source>I'm almost there, just putting the final touches on the answer for you...</source>
+				<target>Ich bin fast fertig und setze gerade noch die letzten Pinselstriche an deine Antwort...</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

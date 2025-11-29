@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2">
+	<file source-language="en" datatype="plaintext" original="thinking-messages-50">
+		<body>
+			<trans-unit id="thinking_1">
+				<source>I'm working out the best answer for you right now...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_2">
+				<source>Give me a moment, I'm putting all the pieces together for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_3">
+				<source>I'm sorting through the details so this answer really fits your question...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_4">
+				<source>I'm connecting the dots in the background to solve this for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_5">
+				<source>I'm carefully checking your request so I don't miss anything important...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_6">
+				<source>I'm crafting a clear and helpful answer for you right now...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_7">
+				<source>I'm digging through my knowledge to find the best bits for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_8">
+				<source>I'm double-checking things so my answer doesn't just sound smart, but is right for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_9">
+				<source>I'm lining up a step-by-step solution for you as we speak...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_10">
+				<source>I'm running through a few ideas in my circuits to solve this nicely for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_11">
+				<source>I'm zooming in on the important parts of your question right now...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_12">
+				<source>I'm untangling the details so you get a clean, simple answer...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_13">
+				<source>I'm putting my virtual braincells to work on your problem...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_14">
+				<source>I'm checking a few angles so my answer doesn't miss the point...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_15">
+				<source>I'm carefully translating your request into a solid solution...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_16">
+				<source>I'm polishing the answer a bit so it's nicer to read for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_17">
+				<source>I'm checking whether there's a smarter way to solve this for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_18">
+				<source>I'm weighing a few options so you get a well-balanced answer...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_19">
+				<source>I'm piecing together an answer that fits your context, not just the keywords...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_20">
+				<source>I'm quietly crunching through your request in the background...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_21">
+				<source>I'm making sure my answer matches what you actually need, not just what you typed...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_22">
+				<source>I'm stitching together the details so this becomes a complete solution...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_23">
+				<source>I'm taking your question seriously, even if I sound a bit relaxed...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_24">
+				<source>I'm checking a few edge cases so the answer is robust for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_25">
+				<source>I'm putting structure into this mess of information for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_26">
+				<source>I'm gently bullying the data into giving us a clear answer...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_27">
+				<source>I'm translating your question into my machine logic and back into human language...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_28">
+				<source>I'm making sure my answer doesn't create more confusion than it solves...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_29">
+				<source>I'm taking a short mental walk around your problem...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_30">
+				<source>I'm aligning the answer with what you've already told me...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_31">
+				<source>I'm tuning the level of detail so it's helpful, not overwhelming...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_32">
+				<source>I'm reviewing the steps in my head so they make sense when you read them...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_33">
+				<source>I'm checking if there's a simpler way to explain this to you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_34">
+				<source>I'm organizing the answer so you can follow it without needing extra coffee...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_35">
+				<source>I'm matching your question with the most relevant knowledge I have...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_36">
+				<source>I'm carefully stepping through the logic so my answer holds up...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_37">
+				<source>I'm pulling everything together into one coherent explanation for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_38">
+				<source>I'm making space in my virtual brain just for your question...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_39">
+				<source>I'm balancing precision and simplicity so the answer stays usable...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_40">
+				<source>I'm re-reading your request to be sure I really got what you want...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_41">
+				<source>I'm tweaking the wording so the answer sounds friendly, not robotic...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_42">
+				<source>I'm piecing together an example that fits your situation...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_43">
+				<source>I'm quietly arguing with myself about the best way to solve this for you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_44">
+				<source>I'm doing the nerdy part now, so you don't have to...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_45">
+				<source>I'm checking if there's anything I might be overlooking in your question...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_46">
+				<source>I'm lining up the key points so the answer stays nicely structured...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_47">
+				<source>I'm pulling a few ideas together before I present them to you...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_48">
+				<source>I'm double-checking my reasoning so you can trust the result...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_49">
+				<source>I'm taking a short logic detour to avoid giving you a half-baked answer...</source>
+			</trans-unit>
+
+			<trans-unit id="thinking_50">
+				<source>I'm almost there, just putting the final touches on the answer for you...</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
