@@ -19,15 +19,9 @@
 
   function spinnerMarkup(counterStart = 0, waitingPrefix = 'Waiting for AI result…', secondsSuffix = 's') {
     return `
-      <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
-        <div class="lds-dual-ring"></div>
-        <div title="${waitingPrefix} ${counterStart}${secondsSuffix}"> <span data-ai-counter>${counterStart}</span>${secondsSuffix}</div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class=smaller title="${waitingPrefix} ${counterStart}${secondsSuffix}"> <span data-ai-counter>${counterStart}</span>${secondsSuffix}</div>
       </div>
-      <style>
-        .lds-dual-ring { display: inline-block; width: 24px; height: 24px; }
-        .lds-dual-ring:after { content: " "; display: block; width: 24px; height: 24px; margin: 1px; border-radius: 50%; border: 2px solid #999; border-color: #999 transparent #999 transparent; animation: lds-dual-ring 1.2s linear infinite; }
-        @keyframes lds-dual-ring { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
-      </style>
     `;
   }
 
@@ -229,16 +223,16 @@
 
       let imageHtml = '';
       if (thinkingImage) {
-        imageHtml = `<div class="d-flex justify-content-center"><img src="${thinkingImage}" alt="Thinking" style="width:100%;max-width:100%;vertical-align:middle;"></div>`;
+        imageHtml = `<div class="d-flex justify-content-center"><img src="${thinkingImage}" alt="Thinking" style="width:100%;max-width:250px;vertical-align:middle;"></div>`;
       }
 
       const modal = createModal(`
-        <h3 style="margin-top:0;margin-bottom:8px;">${i18n.title}</h3>
+        <h3 style="border: 0.2rem solid #5ee0ff; border-radius: 2rem" class="mb-0 mt-2 p-3">${i18n.title}</h3>
         <div style="display:flex;flex-direction:column;gap:8px;">
           ${imageHtml}
-          <div class="d-flex justify-content-center mt-3 mb-3"><div data-ai-progress style="display: inline-block">${spinnerMarkup(0, i18n.waitingPrefix, i18n.secondsSuffix)}</div></div>
+          <div class="d-flex justify-content-center"><div data-ai-progress style="display: inline-block">${spinnerMarkup(0, i18n.waitingPrefix, i18n.secondsSuffix)}</div></div>
           <div class="d-flex justify-content-center"><div data-ai-message style="color:#a00;display: inline-block;"></div></div>
-          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
+          <div class="d-flex justify-content-center">
             <button data-ai-cancel type="button" class="btn btn-primary">${i18n.close}</button>
           </div>
         </div>

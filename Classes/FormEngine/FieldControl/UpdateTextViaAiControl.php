@@ -18,7 +18,7 @@ class UpdateTextViaAiControl extends AbstractNode
         } elseif (isset($this->data['databaseRow']['pid'])) {
             $pid = (int)$this->data['databaseRow']['pid'];
         }
-        $imagePath = \TYPO3\CMS\Core\Utility\PathUtility::getPublicResourceWebPath('EXT:accessibility/Resources/Public/Icons/robot1.svg');
+        $imagePath = \TYPO3\CMS\Core\Utility\PathUtility::getPublicResourceWebPath('EXT:accessibility/Resources/Public/Icons/robot2.svg');
 
         // Prepare i18n labels
         $randThinking = rand(1, 50);

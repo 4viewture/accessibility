@@ -6,24 +6,23 @@
 >
     <title id="title">Thinking assistant robot</title>
     <desc id="desc">
-        A friendly robot with subtle animated glow and floating dots to indicate thinking.
+        A friendly robot with a large thinking bubble, subtle animated glow and chest light.
     </desc>
 
     <style>
-        /* Background gradient */
-        .bg {
-        fill: url(#bgGrad);
-        }
-
         /* Robot base colors */
         .robot-body {
         fill: #f5f8ff;
+        stroke: #0f1630;          /* anthracite outline */
+        stroke-width: 1.4;
         }
         .robot-shadow {
         fill: #d2ddf5;
         }
         .visor {
         fill: #0f1630;
+        stroke: #0f1630;          /* same anthracite tone */
+        stroke-width: 1.2;
         }
 
         /* Lights */
@@ -39,24 +38,40 @@
         .chest-light {
         fill: #5ee0ff;
         animation: chestPulse 2.2s ease-in-out infinite;
+        transform-origin: center;
         }
 
         .head-glow {
         fill: url(#headGlowGrad);
         opacity: 0.0;
         animation: headGlow 3s ease-in-out infinite;
+        transform-origin: center;
         }
 
         .think-dot {
         fill: #5ee0ff;
         opacity: 0.0;
         animation: thinkDots 2.8s ease-in-out infinite;
+        transform-origin: center;
         }
         .think-dot.dot2 {
         animation-delay: 0.35s;
         }
         .think-dot.dot3 {
         animation-delay: 0.7s;
+        }
+
+        /* Text bubble in robot style */
+        .bubble {
+        fill: #f5f8ff;
+        stroke: #5ee0ff;
+        stroke-width: 2.2;
+        }
+        .bubble-text {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 16px;
+        fill: #0f1630;
+        font-weight: 500;
         }
 
         /* Animations */
@@ -109,91 +124,75 @@
         transform: scaleY(0.15);
         }
         }
-
-        /* Text bubble */
-        .bubble {
-        fill: #ffffff;
-        stroke: #d2ddf5;
-        stroke-width: 2;
-        }
-        .bubble-text {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-size: 14px;
-        fill: #0f1630;
-        }
     </style>
 
-    <!-- Background -->
+    <!-- Defs -->
     <defs>
-        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#182a68"/>
-            <stop offset="50%" stop-color="#203b8a"/>
-            <stop offset="100%" stop-color="#132143"/>
-        </linearGradient>
-
         <radialGradient id="headGlowGrad" cx="50%" cy="35%" r="40%">
             <stop offset="0%" stop-color="#5ee0ff" stop-opacity="1"/>
             <stop offset="100%" stop-color="#5ee0ff" stop-opacity="0"/>
         </radialGradient>
     </defs>
 
-    <rect class="bg" x="0" y="0" width="400" height="400" rx="32" />
+    <!-- Soft glow behind head (no overall background) -->
+    <ellipse class="head-glow" cx="200" cy="125" rx="105" ry="76" />
 
-    <!-- Soft glow behind head -->
-    <ellipse class="head-glow" cx="200" cy="125" rx="110" ry="80" />
+    <!-- Floating thinking dots above head (centered, act as connection) -->
+    <circle class="think-dot dot1" cx="190" cy="42" r="4" />
+    <circle class="think-dot dot2" cx="205" cy="32" r="4" />
+    <circle class="think-dot dot3" cx="220" cy="26" r="4" />
 
-    <!-- Floating thinking dots above head -->
-    <circle class="think-dot dot1" cx="200" cy="40" r="4" />
-    <circle class="think-dot dot2" cx="215" cy="32" r="4" />
-    <circle class="think-dot dot3" cx="230" cy="26" r="4" />
-
-    <!-- Text bubble above head (moved higher and slightly right) -->
-    <g transform="translate(225, 35)">
-        <rect class="bubble" x="-60" y="-26" width="120" height="36" rx="18" />
-        <!-- small tail -->
-        <path class="bubble" d="M 0 10 L -7 22 L 8 18 Z" />
-        <text class="bubble-text" x="0" y="-5" text-anchor="middle" dominant-baseline="middle">
-            thinking
+    <!-- Large text bubble further up & to the right, with clear gap -->
+    <g transform="translate(290, 10)" style="display:none">
+        <!-- main bubble -->
+        <rect class="bubble" x="-75" y="0" width="170" height="44" rx="27" />
+        <text class="bubble-text" x="-20" y="25" text-anchor="middle" dominant-baseline="middle">
+            thinking ...
         </text>
     </g>
 
     <!-- Body shadow -->
-    <ellipse class="robot-shadow" cx="200" cy="320" rx="85" ry="22" opacity="0.5"/>
+    <ellipse class="robot-shadow" cx="200" cy="322" rx="80" ry="20" opacity="0.35"/>
 
     <!-- Torso -->
-    <g transform="translate(200, 215)">
-        <rect class="robot-body" x="-60" y="-40" width="120" height="105" rx="34" />
+    <g transform="translate(200, 220)">
+        <path class="robot-body"
+              d="M -56 -40
+         C -80 -22 -72 50 -50 63
+         L 50 63
+         C 72 50 80 -22 56 -40
+         Z" />
         <!-- Chest ring -->
-        <circle cx="0" cy="5" r="24" fill="#d2edff" />
+        <circle cx="0" cy="6" r="24" fill="#d2edff" />
         <!-- Chest light -->
-        <circle class="chest-light" cx="0" cy="5" r="16" />
+        <circle class="chest-light" cx="0" cy="6" r="16" />
     </g>
 
     <!-- Arms -->
     <g>
         <!-- Left arm -->
-        <g transform="translate(120, 210)">
-            <rect class="robot-body" x="-28" y="-28" width="36" height="70" rx="18" />
-            <circle class="robot-body" cx="-10" cy="50" r="16" />
+        <g transform="translate(126, 220)">
+            <rect class="robot-body" x="-26" y="-26" width="32" height="68" rx="18" />
+            <circle class="robot-body" cx="-10" cy="50" r="15" />
         </g>
         <!-- Right arm -->
-        <g transform="translate(280, 210)">
-            <rect class="robot-body" x="-8" y="-28" width="36" height="70" rx="18" />
-            <circle class="robot-body" cx="18" cy="50" r="16" />
+        <g transform="translate(274, 220)">
+            <rect class="robot-body" x="-6" y="-26" width="32" height="68" rx="18" />
+            <circle class="robot-body" cx="18" cy="50" r="15" />
         </g>
     </g>
 
     <!-- Head + face -->
     <g transform="translate(200, 130)">
         <!-- Head base -->
-        <rect class="robot-body" x="-80" y="-65" width="160" height="120" rx="60" />
+        <rect class="robot-body" x="-78" y="-70" width="156" height="124" rx="62" />
         <!-- Side "ears" -->
-        <circle class="robot-body" cx="-78" cy="0" r="20" />
-        <circle class="robot-body" cx="78" cy="0" r="20" />
+        <circle class="robot-body" cx="-78" cy="-4" r="20" />
+        <circle class="robot-body" cx="78" cy="-4" r="20" />
         <!-- Visor -->
-        <rect class="visor" x="-62" y="-40" width="124" height="80" rx="40" />
+        <rect class="visor" x="-60" y="-42" width="120" height="82" rx="41" />
         <!-- Eyes -->
-        <ellipse class="eye left" cx="-26" cy="0" rx="12" ry="18" />
-        <ellipse class="eye right" cx="26" cy="0" rx="12" ry="18" />
+        <ellipse class="eye left" cx="-24" cy="0" rx="12" ry="18" />
+        <ellipse class="eye right" cx="24" cy="0" rx="12" ry="18" />
     </g>
 </svg>
