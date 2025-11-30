@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -34,7 +35,11 @@ class AiProxyController
 
         // Derive imageUrl and context on the server based on table/uid/field
         try {
-            [$imageUrl, $context] = $this->deriveDescribePayload($pid, $table, $uid, $field);
+            /** @var ExtensionConfiguration $extConf */
+            $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class);
+            $embedImage = (bool)$extConf->get('accessibility', 'embedImageForApi');
+
+            [$imageUrl, $context] = $this->deriveDescribePayload($pid, $table, $uid, $field, $embedImage);
         } catch (\Throwable $e) {
             return $this->json(['error' => 'Could not derive image/context: ' . $e->getMessage()], 400);
         }
@@ -70,20 +75,13 @@ class AiProxyController
     /**
      * Derive the external API payload (imageUrl, context) from TYPO3 context
      */
-    private function deriveDescribePayload(int $pid, string $table, int $uid, string $field): array
+    private function deriveDescribePayload(int $pid, string $table, int $uid, string $field, bool $embedImage): array
     {
         $imageUrl = '';
         $context = '';
 
         // 1) Try to resolve image URL
-        $imageUrl = $this->resolveImageUrl($table, $uid, $field);
-        if ($imageUrl === '' && $table === 'sys_file_metadata' && $uid > 0) {
-            // Special handling: metadata row points to sys_file via 'file'
-            $meta = BackendUtility::getRecord('sys_file_metadata', $uid, 'file,title,alternative');
-            if ($meta && !empty($meta['file'])) {
-                $imageUrl = $this->resolveFilePublicUrl((int)$meta['file']);
-            }
-        }
+        $imageUrl = $this->resolveImageUrl($table, $uid, $field, $embedImage);
 
         // 2) Derive context: table/field label + record title + page title if available
         $context = $this->resolveContext($pid, $table, $uid, $field);
@@ -99,21 +97,28 @@ class AiProxyController
         return [$imageUrl, $context];
     }
 
-    private function resolveImageUrl(string $table, int $uid, string $field): string
+    private function resolveImageUrl(string $table, int $uid, string $field, bool $embedImage): string
     {
         if ($uid <= 0 || $table === '') {
             return '';
         }
 
+        $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+
         // Case A: relation via sys_file_reference on given table/field
         try {
             /** @var FileRepository $fileRepository */
-            $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+
             $references = $fileRepository->findByRelation($table, $field, $uid);
             if (!empty($references)) {
                 $ref = $references[0];
                 $original = $ref->getOriginalFile();
                 $url = $original->getPublicUrl();
+
+                if ($embedImage) {
+                    return 'data:' . $original->getMimeType() . ';base64,' . base64_encode($original->getContents());
+                }
+
                 if (is_string($url) && $url !== '') {
                     return $this->absoluteUrl($url);
                 }
@@ -122,26 +127,37 @@ class AiProxyController
             // ignore and continue fallbacks
         }
 
-        // Case B: if table is sys_file and uid points to a file
-        if ($table === 'sys_file' && $uid > 0) {
-            return $this->resolveFilePublicUrl($uid);
+        if ($table === 'sys_file_metadata' && $uid > 0) {
+            // Special handling: metadata row points to sys_file via 'file'
+            $meta = BackendUtility::getRecord('sys_file_metadata', $uid, 'file,title,alternative');
+            if ($meta && !empty($meta['file'])) {
+                $original = $fileRepository->findByUid($meta['file']);
+                $url = $original->getPublicUrl();
+
+                if ($embedImage) {
+                    return 'data:' . $original->getMimeType() . ';base64,' . base64_encode($original->getContents());
+                }
+
+                if (is_string($url) && $url !== '') {
+                    return $this->absoluteUrl($url);
+                }
+            }
         }
 
-        return '';
-    }
+        // Case B: if table is sys_file and uid points to a file
+        if ($table === 'sys_file' && $uid > 0) {
+            $original = $fileRepository->findByUid($uid);
+            $url = $original->getPublicUrl();
 
-    private function resolveFilePublicUrl(int $fileUid): string
-    {
-        try {
-            /** @var ResourceFactory $resourceFactory */
-            $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
-            $file = $resourceFactory->getFileObject($fileUid);
-            $url = $file->getPublicUrl();
+            if ($embedImage) {
+                return 'data:' . $original->getMimeType() . ';base64,' . base64_encode($original->getContents());
+            }
+
             if (is_string($url) && $url !== '') {
                 return $this->absoluteUrl($url);
             }
-        } catch (\Throwable) {
         }
+
         return '';
     }
 
@@ -271,6 +287,13 @@ class AiProxyController
             if (!empty($token) && is_string($token)) {
                 return trim($token);
             }
+        }
+
+        /** @var ExtensionConfiguration $extConf */
+        $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class);
+        $key = $extConf->get('accessibility', 'apiKey');
+        if (!empty($key)) {
+            return trim($key);
         }
 
         return null;

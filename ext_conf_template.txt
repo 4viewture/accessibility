@@ -1,0 +1,5 @@
+# cat=API; type=string; label=The api key for all users in this installation. Attention, it may make more sense to use pagets instead
+apiKey =
+
+# cat=API; type=boolean; label=If true, we send the image as data uri, so the typo3 does not need to be public, per default, we fetch the images per http
+embedImageForApi = 0
