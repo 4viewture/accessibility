@@ -10,7 +10,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Http\RequestFactory;
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\FileRepository;
@@ -80,8 +82,10 @@ class AiProxyController
         $imageUrl = '';
         $context = '';
 
+        $originalFile = $this->resolveOriginalFile($table, $uid, $field);
+
         // 1) Try to resolve image URL
-        $imageUrl = $this->resolveImageUrl($table, $uid, $field, $embedImage);
+        $imageUrl = $this->resolveImageUrl($originalFile);
 
         // 2) Derive context: table/field label + record title + page title if available
         $context = $this->resolveContext($pid, $table, $uid, $field);
@@ -97,68 +101,47 @@ class AiProxyController
         return [$imageUrl, $context];
     }
 
-    private function resolveImageUrl(string $table, int $uid, string $field, bool $embedImage): string
+    private function resolveImageUrl(?File $original = null): string
     {
-        if ($uid <= 0 || $table === '') {
+        if ($original === null) {
             return '';
         }
 
+        $url = $original->getPublicUrl();
+
+        if ($embedImage) {
+            return 'data:' . $original->getMimeType() . ';base64,' . base64_encode($original->getContents());
+        }
+
+        if (is_string($url) && $url !== '') {
+            return $this->absoluteUrl($url);
+        }
+    }
+
+    protected function resolveOriginalFile(string $table, int $uid, string $field): ?File
+    {
         $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
 
-        // Case A: relation via sys_file_reference on given table/field
-        try {
-            /** @var FileRepository $fileRepository */
-
-            $references = $fileRepository->findByRelation($table, $field, $uid);
-            if (!empty($references)) {
-                $ref = $references[0];
-                $original = $ref->getOriginalFile();
-                $url = $original->getPublicUrl();
-
-                if ($embedImage) {
-                    return 'data:' . $original->getMimeType() . ';base64,' . base64_encode($original->getContents());
-                }
-
-                if (is_string($url) && $url !== '') {
-                    return $this->absoluteUrl($url);
-                }
-            }
-        } catch (\Throwable) {
-            // ignore and continue fallbacks
+        $references = $fileRepository->findByRelation($table, $field, $uid);
+        if (!empty($references)) {
+            $ref = $references[0];
+            return $ref->getOriginalFile();
         }
 
         if ($table === 'sys_file_metadata' && $uid > 0) {
             // Special handling: metadata row points to sys_file via 'file'
             $meta = BackendUtility::getRecord('sys_file_metadata', $uid, 'file,title,alternative');
             if ($meta && !empty($meta['file'])) {
-                $original = $fileRepository->findByUid($meta['file']);
-                $url = $original->getPublicUrl();
-
-                if ($embedImage) {
-                    return 'data:' . $original->getMimeType() . ';base64,' . base64_encode($original->getContents());
-                }
-
-                if (is_string($url) && $url !== '') {
-                    return $this->absoluteUrl($url);
-                }
+                return $fileRepository->findByUid($meta['file']);
             }
         }
 
         // Case B: if table is sys_file and uid points to a file
         if ($table === 'sys_file' && $uid > 0) {
-            $original = $fileRepository->findByUid($uid);
-            $url = $original->getPublicUrl();
-
-            if ($embedImage) {
-                return 'data:' . $original->getMimeType() . ';base64,' . base64_encode($original->getContents());
-            }
-
-            if (is_string($url) && $url !== '') {
-                return $this->absoluteUrl($url);
-            }
+            return $fileRepository->findByUid($uid);
         }
 
-        return '';
+        return null;
     }
 
     private function absoluteUrl(string $url): string
@@ -179,6 +162,8 @@ class AiProxyController
     private function resolveContext(int $pid, string $table, int $uid, string $field): string
     {
         $parts = [];
+
+        /** todo move stuff here to get more info related to the record */
 
         // Record title (if available)
         if ($table !== '' && $uid > 0) {
