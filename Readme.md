@@ -1,10 +1,22 @@
 # TYPO3 Accessibility Extension
 
-![BackendForm.png](Documentation/Assets/BackendForm.png)
-
 ## Introduction
 
 The TYPO3 Accessibility Extension provides tools and features to improve the accessibility of your TYPO3 website. It helps you comply with accessibility standards and regulations by providing features for creating accessibility declarations and managing alternative texts for images.
+
+## License needed for some functions
+
+For some functionality licensing is necessary, as you have to use our processing service.
+Please contact us at [hello@4viewture.de](mailto:hello@4viewture.de) for more information.
+
+## TL;DR
+
+* Tools for WCAG
+* AI Image recognition for alternative text
+
+## Overview
+
+![BackendForm.png](Documentation/Assets/BackendForm.png)
 
 ## Features
 
@@ -37,6 +49,8 @@ The module allows you to:
 - Add alternative text to images
 
 This feature helps you improve the accessibility of your website by ensuring that all images have appropriate alternative text.
+
+![2025-11-30_13-03-51.gif](Documentation/Assets/2025-11-30_13-03-51.gif)
 
 ## Planned AI Features
 
