@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FourViewture\Accessibility\Backend\Controller;
 
+use FourViewture\Accessibility\Service\ContextNormalizationService;
+use FourViewture\Accessibility\Service\FileAccessNormalizationService;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -23,7 +25,9 @@ class AiProxyController
 
     public function __construct(
         private readonly RequestFactory $requestFactory,
-        private readonly ResponseFactoryInterface $responseFactory
+        private readonly ResponseFactoryInterface $responseFactory,
+        private readonly FileAccessNormalizationService $fileAccessNormalizationService,
+        private readonly ContextNormalizationService $contextNormalizationService
     ) {
     }
 
@@ -79,16 +83,15 @@ class AiProxyController
      */
     private function deriveDescribePayload(int $pid, string $table, int $uid, string $field, bool $embedImage): array
     {
-        $imageUrl = '';
+        $originalFile = $this->fileAccessNormalizationService->resolveOriginalFile($table, $uid, $field);
+
         $context = '';
 
-        $originalFile = $this->resolveOriginalFile($table, $uid, $field);
-
         // 1) Try to resolve image URL
-        $imageUrl = $this->resolveImageUrl($originalFile);
+        $imageUrl = $this->fileAccessNormalizationService->resolveImageUrl($originalFile, $embedImage);
 
         // 2) Derive context: table/field label + record title + page title if available
-        $context = $this->resolveContext($pid, $table, $uid, $field);
+        $context = $this->contextNormalizationService->resolveContext($pid, $table, $uid, $field, $originalFile);
 
         if ($imageUrl === '' || $context === '') {
             // Provide helpful details for debugging
@@ -99,114 +102,6 @@ class AiProxyController
         }
 
         return [$imageUrl, $context];
-    }
-
-    private function resolveImageUrl(?File $original = null): string
-    {
-        if ($original === null) {
-            return '';
-        }
-
-        $url = $original->getPublicUrl();
-
-        if ($embedImage) {
-            return 'data:' . $original->getMimeType() . ';base64,' . base64_encode($original->getContents());
-        }
-
-        if (is_string($url) && $url !== '') {
-            return $this->absoluteUrl($url);
-        }
-    }
-
-    protected function resolveOriginalFile(string $table, int $uid, string $field): ?File
-    {
-        $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
-
-        $references = $fileRepository->findByRelation($table, $field, $uid);
-        if (!empty($references)) {
-            $ref = $references[0];
-            return $ref->getOriginalFile();
-        }
-
-        if ($table === 'sys_file_metadata' && $uid > 0) {
-            // Special handling: metadata row points to sys_file via 'file'
-            $meta = BackendUtility::getRecord('sys_file_metadata', $uid, 'file,title,alternative');
-            if ($meta && !empty($meta['file'])) {
-                return $fileRepository->findByUid($meta['file']);
-            }
-        }
-
-        // Case B: if table is sys_file and uid points to a file
-        if ($table === 'sys_file' && $uid > 0) {
-            return $fileRepository->findByUid($uid);
-        }
-
-        return null;
-    }
-
-    private function absoluteUrl(string $url): string
-    {
-        // If already absolute, return as-is
-        if (preg_match('#^https?://#i', $url)) {
-            return $url;
-        }
-        // Build absolute from current backend host
-        $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-        $host = $_SERVER['HTTP_HOST'] ?? '';
-        if ($host !== '') {
-            return rtrim($scheme . '://' . $host, '/') . '/' . ltrim($url, '/');
-        }
-        return $url;
-    }
-
-    private function resolveContext(int $pid, string $table, int $uid, string $field): string
-    {
-        $parts = [];
-
-        /** todo move stuff here to get more info related to the record */
-
-        // Record title (if available)
-        if ($table !== '' && $uid > 0) {
-            $row = BackendUtility::getRecord($table, $uid) ?? [];
-            $title = '';
-            try {
-                $title = (string)BackendUtility::getRecordTitle($table, $row, true);
-            } catch (\Throwable) {
-                // Fallback to common fields
-                foreach (['title','header','name','label','uid'] as $f) {
-                    if (!empty($row[$f])) { $title = (string)$row[$f]; break; }
-                }
-            }
-            if ($title !== '') {
-                $parts[] = $title;
-            }
-        }
-
-        // Field label
-        if ($table !== '' && $field !== '') {
-            try {
-                $label = (string)BackendUtility::getItemLabel($table, $field);
-                if ($label !== '') {
-                    $parts[] = $label;
-                }
-            } catch (\Throwable) {
-                $parts[] = $table . '.' . $field;
-            }
-        }
-
-        // Page title
-        if ($pid > 0) {
-            $page = BackendUtility::getRecord('pages', $pid, 'title');
-            if ($page && !empty($page['title'])) {
-                $parts[] = 'on page: ' . (string)$page['title'];
-            }
-        }
-
-        $text = trim(implode(' – ', array_filter($parts)));
-        if ($text === '') {
-            $text = 'Image description request for ' . ($table ?: 'record') . ' #' . $uid . ' (' . $field . ')';
-        }
-        return $text;
     }
 
     public function status(ServerRequestInterface $request): ResponseInterface
